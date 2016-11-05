@@ -1,0 +1,17 @@
+- if @posts.any?
+  table#posts
+    tbody
+      - @posts.find_each do |post|
+        tr
+          td = post.body
+          td = post.user.email
+- else
+  p No posts here
+
+br
+- if signed_in?
+  = link_to 'Click here to log out', destroy_user_session_path
+- else
+  = link_to 'Click here to register', new_user_registration_path
+  br
+  = link_to 'Click here to log in', new_user_session_path
