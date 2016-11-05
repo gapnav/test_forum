@@ -1,19 +1,21 @@
-p.notice
- = flash[:notice]
+h1 Posts
+
+- if flash[:notice].present?
+  .alert.alert-success
+    = flash[:notice]
 
 - if @posts&.any?
-  table#posts
+  table.table
     - @posts.find_each do |post|
-      tr
+      tr class="#{'info' if post.user == current_user}"
         td.body = post.body
         td = post.user.email
 - else
   p No posts here
 
-br
 - if signed_in?
   = render 'form'
-  p = link_to 'Click here to log out', destroy_user_session_path
+  p = link_to "Click here to log out (#{current_user.email})", destroy_user_session_path
 - else
   p = link_to 'Click here to register', new_user_registration_path
   p = link_to 'Click here to log in', new_user_session_path

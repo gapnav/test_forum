@@ -1,8 +1,13 @@
 - if @post.errors.any?
-  p.alert
+  .alert.alert-danger
     = @post.errors.full_messages.join ', '
-p Enter a new entry:
-= form_for @post, url: { action: 'create' } do |f|
-  = f.text_field :body
-  br
-  = f.submit 'Add new Entry'
+= form_for @post, url: { action: 'create' }, html: {class: 'form-horizontal'} do |f|
+  .well
+    .fieldset
+      legend Enter a new entry
+      .form-group
+        .col-xs-12
+          = f.text_field :body, placeholder: 'New entry', class: 'form-control'
+      .form-group
+        .col-xs-12
+          = f.submit 'Add new Entry', class: 'btn btn-success'
