@@ -1,0 +1,8 @@
+- if @post.errors.any?
+  p.alert
+    = @post.errors.full_messages.join ', '
+p Enter a new entry:
+= form_for @post, url: { action: 'create' } do |f|
+  = f.text_field :body
+  br
+  = f.submit 'Add new Entry'
